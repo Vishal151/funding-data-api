@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 import psycopg2
 from dotenv import load_dotenv
+import json
 import os
 
 load_dotenv()
@@ -23,11 +24,15 @@ def funded_last_ten():
         FROM raise
         LIMIT 10;
     """)
-    row = jsonify(cursor.fetchall())
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    row = cursor.fetchall()
+    json_data=[]
+    for result in row:
+            json_data.append(dict(zip(row_headers,result)))
     cursor.close()
     connection.close()
 
-    return row
+    return json.dumps(json_data, default=str) # hack to jsonify datetime object
 
 @app.route('/funded/<string:category>')
 def funded_by_category(category):
