@@ -9,33 +9,46 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 
 app = Flask(__name__)
 
+
 @app.route('/funded')
-def funded_last_ten():
-    connection = psycopg2.connect(dsn=DATABASE_URL)
-    cursor = connection.cursor()
-    cursor.execute("""
-        SELECT 
-            id, 
-            company_name, 
-            raise_date, 
-            raise_amount_mill_dollars::float, 
-            company_funding_round, 
-            company_website 
-        FROM raise
-        LIMIT 25;
-    """)
-    row_headers=[x[0] for x in cursor.description] #this will extract row headers
-    row = cursor.fetchall()
-    json_data=[]
-    for result in row:
-            json_data.append(dict(zip(row_headers,result)))
-    cursor.close()
-    connection.close()
-    funded_data = json.dumps(json_data, default=str) # hack to jsonify datetime object
-    return Response(funded_data, mimetype='application/json') 
+def funded_recently():
+    """
+    This endpoint returns all the recently funded companies 
+    Limit to last 25 for demo - this is roughly the number funded in the last week
+    """
+    try:
+        connection = psycopg2.connect(dsn=DATABASE_URL)
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT 
+                id, 
+                company_name, 
+                raise_date, 
+                raise_amount_mill_dollars::float, 
+                company_funding_round, 
+                company_website 
+            FROM raise
+            LIMIT 25;
+        """)
+        row_headers=[x[0] for x in cursor.description] #this will extract row headers
+        row = cursor.fetchall()
+        json_data=[]
+        for result in row:
+                json_data.append(dict(zip(row_headers,result)))
+        cursor.close()
+        connection.close()
+        funded_data = json.dumps(json_data, default=str) # hack to jsonify datetime object
+        return Response(funded_data, mimetype='application/json') 
+        
+    except Exception as e:
+        return {'error': str(e)} 
 
 @app.route('/funded/category/<string:category>')
 def funded_by_category(category):
+    """
+    This endpoint returns all the recently funded companies 
+    Limit to last 25 for demo - this is roughly the number funded in the last week
+    """
     try:
         connection = psycopg2.connect(dsn=DATABASE_URL)
         cursor = connection.cursor()
