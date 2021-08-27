@@ -1,8 +1,4 @@
-# Add SQL file in repo, with table generation script
-# Look up executing SQL from pandas
 # DB pool, connection manager
-# Error handling in API
-
 # Documentation
 # Deployment
 
