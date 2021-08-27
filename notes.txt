@@ -1,0 +1,15 @@
+# Add SQL file in repo, with table generation script
+# Look up executing SQL from pandas
+# DB pool, connection manager
+# Error handling in API
+
+# Documentation
+# Deployment
+
+# JWT one way to authenticate; others include header tokens
+
+Current process:
+
+1) Download the file from google docs and save as CSV in the data folder
+2) Run the funding/raise script to clean and create CSV for Postgres
+3) Update the data into Postgres SQL via PGAdmin
