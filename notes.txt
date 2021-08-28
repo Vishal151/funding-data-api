@@ -1,11 +1,13 @@
+Current process:
+
+1) Download the file from google docs and save as CSV in the data folder
+2) Run the funding/raise script to clean and create CSV for Postgres
+3) Update the data into Postgres SQL via PGAdmin
+
 # DB pool, connection manager
 # Documentation
 # Deployment
 
 # JWT one way to authenticate; others include header tokens
 
-Current process:
 
-1) Download the file from google docs and save as CSV in the data folder
-2) Run the funding/raise script to clean and create CSV for Postgres
-3) Update the data into Postgres SQL via PGAdmin
