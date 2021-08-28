@@ -1,14 +1,38 @@
 from flask import Flask, jsonify, Response
 import psycopg2
-from dotenv import load_dotenv
 import json
 import os
 
-load_dotenv()
-DATABASE_URL = os.getenv('DATABASE_URL')
+# from dotenv import load_dotenv
+# load_dotenv()
+# DATABASE_URL = os.environ.get('DATABASE_URI')
 
 app = Flask(__name__)
+DATABASE_URL = os.environ.get('DATABASE_URI')
 
+@app.route('/')
+def home_view():
+    """
+    Provides some information on endpoints
+    """
+    return """
+    <h1> Welcome </h1>
+    <h3> This is a simple REST API with information on VC funded companies </h3>
+    <br> Data is updated roughly every month, and there are currently +30K entries in the full dataset. 
+    <br>
+    <br> There are currently 3 test endpoints - more comprehensive documentation to follow...
+    <br>
+    <h5> 1) Return 25 recently funded start-ups; </h5>
+    https://vc-funded-api.herokuapp.com/funded
+    <br>
+    <h5> 2) Returns companies funded by category: </h5>
+    https://vc-funded-api.herokuapp.com/funded/category/<string:category>
+    <br> Example endpoint: https://vc-funded-api.herokuapp.com/funded/category/Cybersecurity
+    <br>
+    <h5> 3) Returns companies funded by name: </h5>
+    https://vc-funded-api.herokuapp.com/funded/company/<string:company_name>
+    <br> Example endpoint: https://vc-funded-api.herokuapp.com/funded/company/Tessian
+    """
 
 @app.route('/funded')
 def funded_recently():
