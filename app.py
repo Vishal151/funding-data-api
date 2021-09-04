@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, Response, render_template
 import psycopg2
 import json
 import os
@@ -15,7 +15,7 @@ def home_view():
     """
     Provides some information on endpoints
     """
-    return """
+    """
     <h1> Welcome </h1>
     <h3> This is a simple REST API with information on VC funded companies </h3>
     <br> Data is updated roughly every month, and there are currently +30K entries in the full dataset. 
@@ -33,6 +33,7 @@ def home_view():
     https://vc-funded-api.herokuapp.com/funded/company/<string:company_name>
     <br> Example endpoint: https://vc-funded-api.herokuapp.com/funded/company/Tessian
     """
+    return render_template("main.html")
 
 @app.route('/funded')
 def funded_recently():
@@ -147,4 +148,4 @@ def funded_company(company_name):
         return {'error': str(e)}
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

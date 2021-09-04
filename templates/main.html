@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <div class="container">
+        <p class="h1 text-center text-dark"> Welcome </p>
+        <p class="h3 text-center text-secondary"> This is a simple REST API with information on VC funded companies</p>
+        <br> 
+            <p class="h5 text-center text-success">
+                Data is updated roughly every month, and there are currently over 30K entries in the full dataset.
+                <br> There are currently 3 test endpoints - more comprehensive documentation to follow... 
+            </p>
+        <br>
+
+        <table class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Description</th>
+                <th scope="col">Endpoint</th>
+                <th scope="col">Example Endpoint</th>
+            </thead>
+            <tbody>
+                <tr class="table-info">
+                    <th scope="row">1</th>
+                    <td>Return 25 recently funded start-ups</td>
+                    <td><a href="#">/funded</a></td>
+                    <td>
+                        <a class="text-dark" href="https://vc-funded-api.herokuapp.com/funded">https://vc-funded-api.herokuapp.com/funded</a> 
+                    </td>
+                  </tr>
+                  <tr class="table-light">
+                    <th scope="row">2</th>
+                    <td>Returns companies funded by category</td>
+                    <td><a href="#">/funded/company/{str: category}</a></td>
+                    <td>
+                        <a  class="text-dark"  href="https://vc-funded-api.herokuapp.com/funded/category/Cybersecurity">https://vc-funded-api.herokuapp.com/funded/category/Cybersecurity</a> 
+                    </td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">3</th>
+                    <td>Returns companies funded by name </td>
+                    <td><a href="#">/funded/company/{str: company_name}</a></td>
+                    <td>
+                        <a  class="text-dark"  href="https://vc-funded-api.herokuapp.com/funded/company/Tessian">https://vc-funded-api.herokuapp.com/funded/company/Tessian</a> 
+                    </td>
+                    
+                  </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
