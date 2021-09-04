@@ -51,7 +51,8 @@ def funded_recently():
                 raise_date, 
                 raise_amount_mill_dollars::float, 
                 company_funding_round, 
-                company_website 
+                company_website
+                company_category 
             FROM raise
             LIMIT 25;
         """)
@@ -148,4 +149,4 @@ def funded_company(company_name):
         return {'error': str(e)}
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
